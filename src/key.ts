@@ -4,6 +4,7 @@ const buildRgx = /i.{1,3}"([a-f]|[0-9]|-){1,36}"/g;
 const keyRgx = /encode\("([A-z]|[0-9]){32}"/g;
 let blooketKey: string | undefined;
 let blooketBuild: string | undefined;
+// deno-lint-ignore ban-types
 let updateFunc: Function | undefined;
 
 /**
@@ -33,7 +34,9 @@ async function getScripts(): Promise<string[] | undefined> {
   let source: string | null = null;
   try {
     source = (await axiod.get("https://dashboard.blooket.com/index.html")).data;
-  }catch {}
+  }catch {
+    return;
+  }
   if(!source) return;
   
   const mainScripts: string[] = [];
@@ -66,6 +69,7 @@ export async function refreshKeys(): Promise<boolean> {
 }
 
 /** Sets up a function to be called when the build ID or crypto key changes */
+// deno-lint-ignore ban-types
 export function onUpdate(func: Function) {
   updateFunc = func;
 }
