@@ -1,4 +1,4 @@
-import * as crypto from "../mod.ts";
+import * as crypto from "https://raw.githubusercontent.com/blooket-bot/crypto/master/mod.ts";
 
 // Set the update function
 const onUpdate = (build: string | undefined, key: string | undefined) => console.log("Blooket Build Updated!", build, key);
